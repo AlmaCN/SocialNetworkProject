@@ -1,5 +1,7 @@
 package it.develhope.team4.entities;
 
+import it.develhope.team4.enums.PrivacyType;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -8,19 +10,19 @@ import java.util.UUID;
 
 public class User {
 
-    String userId;
-    String name;
-    String surname;
-    LocalDate birthDate;
-    int age;
-    String email;
-    String username;
-    String telephone;
-    String password;
-    boolean isBanned;
-    List<Post> userPosts = new ArrayList<>();
-    List <User> friends = new ArrayList<>();
-    //List <Post> homePagePosts = new ArrayList<>();
+    private String userId;
+    private String name;
+    private String surname;
+    private LocalDate birthDate;
+    private int age;
+    private String email;
+    private String username;
+    private String telephone;
+    private String password;
+    private boolean isBanned;
+    private List<Post> userPosts = new ArrayList<>();
+    private List <String> friends = new ArrayList<>();
+    //private List <Post> homePagePosts = new ArrayList<>();
 
     public User(String name, String surname, LocalDate birthDate, String email, String username, String telephone, String password){
         this.userId = UUID.randomUUID().toString();
@@ -34,17 +36,50 @@ public class User {
         this.password = password;
         this.isBanned = false;
     }
-    static void register()
-    static void loginUsername(String username, String password)
-    static void loginEmail(String username, String password)
-    static void loginTelephone(String username, String password)
-    Post createPost(String postDescription, String urlImg/urlVideo) (List di url images?)
-    void requestFriendship(String userId)
-    boolean acceptFriend(boolean acceptance, String idFriend)
-    void removeFriend(String idFriend)
-    void modifyPassword()
-    void modifyUsername()
-    void modifyEmail()
+    public static User register(String name, String surname, LocalDate birthDate, String email, String username, String telephone, String password){
+        return new User(name, surname, birthDate, email, username, telephone, password);
+    }
+    public static void loginUsername(String username, String password, boolean twoFactorsAuthentication){
+        //nella tabella del database deve cercare nella colonna username se questo esiste
+        //se esiste prendi l'id dell'user e vedi se la password di quell'id corrisponde
+        //deve gestire se username non c'è e se password sbagliata
+        //come usare la twoFactorsAuthentication
+    }
+    public static void loginEmail(String email, String password, boolean twoFactorsAuthentication){
+        //lo stesso che con loginUsername
+    }
+    public static void loginTelephone(String telephone, String password, boolean twoFactorsAuthentication){
+        //lo stesso che con loginUsername
+    }
+    public Post createPost(String postDescription, String urlImg, PrivacyType privacy){
+        userPosts.add(new Post(this.userId, urlImg, postDescription, privacy));
+        return new Post(this.userId, urlImg, postDescription, privacy);
+    }
+    public void requestFriendship(String userId){
+        //implementazione?
+    }
 
+    public void acceptFriend(String userId){
+        //implementazione?
+    }
+
+    public void declineFriend(){
+        //implementazione?
+    }
+    public void addFriend(String idFriend){
+        friends.add(idFriend);
+    }
+    public void removeFriend(String idFriend){
+        friends.remove(idFriend);
+    }
+    public void modifyPassword(String newPassword){
+
+    }
+    public void modifyUsername(){
+
+    }
+    public void modifyEmail(){
+
+    }
 
 }
