@@ -4,5 +4,9 @@ public enum Reactions {
     LIKE,
     LAUGH,
     ANGRY,
-    LOVING,DEATH,
+    LOVING,
+    DEATH,
+    PARTY,
+    WORRIED,
+    PRAYING
 }
