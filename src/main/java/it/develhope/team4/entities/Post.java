@@ -34,8 +34,16 @@ public class Post {
         comments.add(new Comment(this.postId, idUser, comment));
     }
 
+    public void deleteComment(){
+
+    }
+
     public void addReaction(String idUser, Reactions reaction){
         reactions.add(new Reaction(this.postId, idUser,reaction));
+    }
+
+    public void deleteReaction(){
+
     }
 
     public void sharePost(){
@@ -44,6 +52,10 @@ public class Post {
 
     public void modifyPost(){
         //da dividere? Come? In questa classe? Che parametri in input? E output?
+    }
+
+    public void deletePost(){
+
     }
 
     public String getPostId() {
