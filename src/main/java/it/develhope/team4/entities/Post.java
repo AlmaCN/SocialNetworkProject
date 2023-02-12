@@ -9,20 +9,23 @@ import java.util.List;
 import java.util.UUID;
 
 public class Post {
-
+    //PostID serve un id unico per ogni post o è superfluo?
     private String postId;
-    private String userId;
+    //userId dovrebbe essere User user.userId o String userId (di Post)?
+    private String postUserId;
     private String urlImg;
     private String postDescription;
     private LocalDateTime publicationDate;
     private LocalDateTime lastUpdateDate;
     private PrivacyType privacy;
-    private List<Reaction> reactions = new ArrayList<>();
+    private List <Reaction> reactions = new ArrayList<>();
     private List <Comment> comments = new ArrayList<>();
 
-    public Post(String userId, String urlImg, String postDescription, PrivacyType privacy){
+
+
+    public Post(String postUserId, String urlImg, String postDescription, PrivacyType privacy){
         this.postId = UUID.randomUUID().toString();
-        this.userId = userId;
+        this.postUserId = postUserId;
         this.urlImg = urlImg;
         this.postDescription = postDescription;
         this.privacy = privacy;
@@ -34,6 +37,8 @@ public class Post {
         comments.add(new Comment(this.postId, idUser, comment));
     }
 
+    //come prendiamo un commento? Mettiamo un identifier nel parametro? usiamo un postId? Prendiamo dal database
+    // in merito ad un determinato dato?
     public void deleteComment(){
 
     }
@@ -42,11 +47,13 @@ public class Post {
         reactions.add(new Reaction(this.postId, idUser,reaction));
     }
 
-    public void deleteReaction(){
-
+    public void deleteReaction(String postId, Reactions reactions){
+        //come deleto le cose?
     }
 
-    public void sharePost(){
+    public void sharePost(Post sharedPost,User userToShareTo){
+        //sharedPost.funzionePerCondividere
+        //Serve dare un ID unico anche al post? O bastano le variabili di 1 dato post
         //In questa classe? Che parametri in input? E output? Implementazione?
     }
 
@@ -62,8 +69,8 @@ public class Post {
         return postId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getPostUserId() {
+        return postUserId;
     }
 
     public String getUrlImg() {

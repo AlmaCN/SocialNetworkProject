@@ -1,7 +1,7 @@
 package it.develhope.team4.entities;
 
 import it.develhope.team4.enums.PrivacyType;
-import lombok.Getter;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
+
+
+
+
+@Data
 public class User {
 
     private String userId;
