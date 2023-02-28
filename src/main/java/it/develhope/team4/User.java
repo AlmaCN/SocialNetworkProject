@@ -1,71 +1,54 @@
 package it.develhope.team4;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.UUID;
-
 public class User {
 
-    public String name;
-    public String surname;
-    public String username;
-    public String email;
-    public String password;
-    //    public DateTimeFormatter birthDate;
-//    public int age;
-    public boolean isBlocked;
-    public UUID randomUUID;
-    //List<User> users;
+    private String idUser;
+    private String nameUser;
+    private String surnameUser;
+    private String emailUser;
+    private String passwordUser;
+    private String nicknameUser;
 
-    static HashMap<String, UUID> users = new HashMap<>();
+    //Setters
+    public void setNameUser(String nameUser){
+        this.nameUser = nameUser;
+    }
 
-    Scanner sc = new Scanner(System.in);
+    public void setSurnameUser(String surnameUser){
+        this.surnameUser = surnameUser;
+    }
 
-    public void newUser() {
-        System.out.println("Enter your name: ");
-        this.name = sc.nextLine();
-        System.out.println("Enter your surname: ");
-        this.surname = sc.nextLine();
-        System.out.println("Enter your username: ");
-        this.username = sc.nextLine();
-        System.out.println("Enter your email: ");
-        this.email = sc.nextLine();
-
-        //emailCheckerFirst();
-
-        System.out.println("Enter your password");
-        this.password = sc.nextLine();
-        this.isBlocked = false;
-        randomUUID = UUID.randomUUID();
-
-        System.out.println("Benvenuto " + username);
-        users.put(username, randomUUID);
+    public void setEmailUser(String emailUser){
+        this.emailUser = emailUser;
     }
 
 
-    public void emailCheckerFirst() {
-        boolean emailCorrect = true;
-        while (emailCorrect) {
-            if (!email.contains("@")) {
-                emailCorrect = false;
-                System.out.println("Email incorrect");
-                System.out.println("Enter your email again: ");
-                sc.nextLine();
-            } else if (email.contains("\\s+")) {
-                emailCorrect = false;
-                System.out.println("Email incorrect");
-                System.out.println("Enter your email again: ");
-                sc.nextLine();
-            } else {
-                System.out.println("Email correct");
-            }
-        }
+    public void setPasswordUser(String passwordUser){
+        this.passwordUser = passwordUser;
     }
 
-    public String postCreation() {
-        Post post = new Post();
-        post.postCreation(post.username, post.message);
-        return post.message;
+    public void setNicknameUser(String nicknameUser) {
+        this.nicknameUser = nicknameUser;
+    }
+
+    //Getters
+    public String getNameUser(){
+        return nameUser;
+    }
+
+    public String getSurnameUserUser(){
+        return surnameUser;
+    }
+
+    public String getEmailUser(){
+        return emailUser;
+    }
+
+    public String getPasswordUser(){
+        return passwordUser;
+    }
+
+    public String getNicknameUser(){
+        return nicknameUser;
     }
 }

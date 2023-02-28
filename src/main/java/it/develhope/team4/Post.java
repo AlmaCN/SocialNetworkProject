@@ -2,20 +2,19 @@ package it.develhope.team4;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
 public class Post {
 
-    public User username;
+    public UserDeprecato username;
     public UUID postId;
     public LocalDateTime creationDate;
     public LocalDateTime updateDate;
     public String message;
     public ReactionType reaction;
     //List<Post> posts;
-    HashMap<User, UUID> posts = new HashMap<>();
+    HashMap<UserDeprecato, UUID> posts = new HashMap<>();
 
 //    public Post(User username, String message){
 //        this.username = username;
@@ -24,7 +23,7 @@ public class Post {
 
     public Post(){};
 
-    public void postCreation(User username, String message){
+    public void postCreation(UserDeprecato username, String message){
         this.username = username;
         LocalDateTime ldt = LocalDateTime.now();
         creationDate = ldt;
