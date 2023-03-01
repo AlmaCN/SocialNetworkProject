@@ -3,42 +3,37 @@ package team4.entities;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Post {
 
-    String idPost;
-    public String username;
-    public String message;
+    private String message;
     private User user;
-    public LocalDateTime publicationDate;
-    public LocalDateTime lastUpdateDate;
-    public List <Reaction> reactions = new ArrayList<>();
+    private LocalDateTime publicationDate;
+    //ancora da capire come usarlo!
+    //private PrivacyType privacy;
+    public List<Reaction> reactions = new ArrayList<>();
+    public List <Comment> comments = new ArrayList<>();
 
-    public Post(User user, String message){
-        this.idPost = UUID.randomUUID().toString();
+    public Post(User user, String message, LocalDateTime date) {
         this.user = user;
-        this.publicationDate = LocalDateTime.now();
-        this.lastUpdateDate = LocalDateTime.now();
         this.message = message;
+        this.publicationDate = date;
     }
 
-    public static void createPost(User user){
-        Post newPost = new Post(user, "Ciao oggi sono felice e voi?");
-        System.out.println(newPost);
-        Database.allPosts.add(newPost);
+    public String getMessage(){
+        return this.message;
     }
 
-    public void modifyPost(){
-        //modifichi lastUpdateDate
+    public LocalDateTime getPublicationDate(){
+        return this.publicationDate;
+    }
+
+    public User getUser(){
+        return this.user;
     }
 
     @Override
     public String toString() {
-        return "Post { " +"\n" +
-                username + "                     " + lastUpdateDate + "\n"
-                + message + "\n" +
-                reactions + "\n" +
-                " }";
+        return message + "-----" + publicationDate.toString();
     }
 }

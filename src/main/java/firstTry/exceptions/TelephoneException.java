@@ -1,4 +1,4 @@
-package team4.exceptions;
+package firstTry.exceptions;
 
 public class TelephoneException extends Exception{
 }
