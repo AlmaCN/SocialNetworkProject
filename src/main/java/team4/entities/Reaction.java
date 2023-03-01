@@ -1,6 +1,6 @@
 package team4.entities;
 
-import it.develhope.team4.enums.ReactionType;
+import team4.enums.ReactionType;
 
 public class Reaction {
     private Post post;

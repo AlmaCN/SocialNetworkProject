@@ -1,6 +1,6 @@
 package team4;
 
-import it.develhope.team4.entities.User;
+import team4.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;

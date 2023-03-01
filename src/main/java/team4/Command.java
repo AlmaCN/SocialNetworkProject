@@ -1,16 +1,16 @@
 package team4;
 
-import it.develhope.team4.entities.Comment;
-import it.develhope.team4.entities.Post;
-import it.develhope.team4.entities.Reaction;
-import it.develhope.team4.entities.User;
-import it.develhope.team4.enums.ReactionType;
+import team4.entities.Comment;
+import team4.entities.Post;
+import team4.entities.Reaction;
+import team4.entities.User;
+import team4.enums.ReactionType;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static it.develhope.team4.Main.*;
+import static team4.Main.*;
 
 public class Command {
 
