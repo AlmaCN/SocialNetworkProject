@@ -35,10 +35,7 @@ public class Main {
         String chosen = "";
         boolean continueOrNot = false;
 
-        //non esce dal while, perchè?
-
-        while (!chosen.equalsIgnoreCase("exit") || !continueOrNot) {
-
+        do {
             System.out.println("Vuoi registrarti (register), fare il login (login) o uscire (exit)?");
             chosen = s.nextLine().toLowerCase();
             Command com = new Command(chosen);
@@ -54,15 +51,19 @@ public class Main {
                     continueOrNot = true;
                     break;
                 }
+                case "exit" -> {
+                    System.out.println("Arrivederci!");
+                    return;
+                }
                 default -> System.out.println("Comando non esistente, riprova!");
             }
 
-        }
+        }while(!continueOrNot);
 
         String command = "";
 
         //ora lo user che mi serve, che sta accedendo alle funzioni è thisUser
-        while(!command.equalsIgnoreCase("exit")){
+        while(true){
             System.out.println("I comandi disponibili sono: ");
 
             //devo filtrare con stream per togliere register e login poi li stampo
@@ -77,6 +78,10 @@ public class Main {
             Command comm1 = new Command(command);
 
             switch (command) {
+                case "exit" ->{
+                    System.out.println("Arrivederci!");
+                    return;
+                }
                 case "post" -> {
                     comm1.createPost(thisUser);
                     break;
@@ -95,8 +100,6 @@ public class Main {
                 default -> System.out.println("Comando non esistente, riprova!");
             }
         }
-
-        System.out.println("Grazie e arrivederci!");
 
     }
 

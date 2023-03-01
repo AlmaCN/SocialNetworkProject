@@ -1,6 +1,6 @@
 package firstTry.entities;
 
-import it.develhope.socialProject.team4.exceptions.*;
+import firstTry.exceptions.*;
 
 import java.time.LocalDate;
 import java.time.Period;
