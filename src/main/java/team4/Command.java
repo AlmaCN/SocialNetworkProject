@@ -44,14 +44,27 @@ public class Command {
                 }
             }
         }
+
+        boolean emailBool = false;
+        String email = null;
+        while(!emailBool){
+            System.out.println("Inserisci la tua email");
+            email = s.nextLine();
+            for(int i = 0; i < users.size(); i++){
+                if(!email.equals(users.get(i).getEmail())){
+                    emailBool = true;
+                }
+            }
+        }
+
         System.out.println("Inserisci la tua password");
         String password = s.nextLine();
 
-        users.add(new User(name, surname, username, password));
+        users.add(new User(name, surname, username, email, password));
 
         System.out.println("Registrazione avvenuta con successo!");
 
-        return new User(name, surname, username, password);
+        return new User(name, surname, username, email, password);
 
     }
 

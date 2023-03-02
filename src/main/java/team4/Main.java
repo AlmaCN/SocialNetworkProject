@@ -20,7 +20,7 @@ public class Main {
         commands.add(new Command("exit"));
         commands.add(new Command("register"));
         commands.add(new Command("login"));
-        commands.add(new Command("create post"));
+        commands.add(new Command("post"));
         commands.add(new Command("comment"));
         commands.add(new Command("reaction"));
 
@@ -28,8 +28,8 @@ public class Main {
         commands.add(new Command("search post"));
         //aggiungere anche vedere i miei post e implementare nello switch finale i comandi mancanti
 
-        users.add(new User("Gaia", "Zanchi", "gaiaazanchi", "gaia"));
-        users.add(new User("Lorenzo", "Rossini", "lorenzoros", "lorenzo"));
+        users.add(new User("Gaia", "Zanchi", "gaiaazanchi", "gaia@gmail.com", "gaia"));
+        users.add(new User("Lorenzo", "Rossini", "lorenzoros","lore@gmail.com", "lorenzo"));
 
         System.out.println("Benvenuto nel nostro social!");
         String chosen = "";
@@ -67,8 +67,12 @@ public class Main {
             System.out.println("I comandi disponibili sono: ");
 
             //devo filtrare con stream per togliere register e login poi li stampo
+            List<Command> newCommList = commands.stream().filter(elem ->{
+                return !elem.getDescription().equalsIgnoreCase("register") && !elem.getDescription().equalsIgnoreCase("login");
+            }).toList();
+
             System.out.print("- ");
-            for(Command c : commands){
+            for(Command c : newCommList){
                 System.out.print(c + " - ");
             }
             System.out.println();
