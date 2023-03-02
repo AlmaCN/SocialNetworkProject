@@ -31,6 +31,8 @@ public class Main {
          */
         User user = new User();
 
+        Post post = new Post();
+
         /**
          * Ho creato uno scanner
          */
@@ -152,65 +154,93 @@ public class Main {
                         System.out.println("Welcome back " + nick + "!");
                     }
 
-                    System.out.println("What do you want to do? Type 'settings', 'profile', 'chat' or 'community'!");
-                    HomePage hp = HomePage.valueOf(scanner.nextLine().toUpperCase());
-                    switch (hp){
-                        case SETTINGS -> {
-                            System.out.println("What do you need to change? Type 'name', 'surname', 'email', 'password' or 'nickname'!");
-                            Settings set = Settings.valueOf(scanner.nextLine().toUpperCase());
-                            switch(set){
-                                case NAME -> {
-                                    System.out.println("Enter your new name: ");
-                                    String newName = scanner.nextLine();
-                                    statement.executeUpdate(String.format("update socialnetwork.user set name_user = \"%s\" where id_user = \"%d\";", newName, idNumber));
-                                    rs = statement.executeQuery(String.format("select name_user from user where id_user = \"%d\"", idNumber));
-                                    while(rs.next()){
-                                        String name = rs.getString("name_user");
-                                        System.out.println("Your name was changed successfully in " + name);
-                                    }
+                    while(true) {
+                        System.out.println("What do you want to do? Type 'settings', 'profile', 'chat' or 'community'!" );
+                        HomePage hp = HomePage.valueOf(scanner.nextLine().toUpperCase());
+                        switch (hp) {
+                            case SETTINGS -> {
+                                System.out.println("What do you need to change? Type 'name', 'surname', 'email', 'password' or 'nickname'!" );
+                                Settings set = Settings.valueOf(scanner.nextLine().toUpperCase());
+                                switch (set) {
+                                    case NAME -> {
+                                        System.out.println("Enter your new name: " );
+                                        String newName = scanner.nextLine();
+                                        statement.executeUpdate(String.format("update socialnetwork.user set name_user = \"%s\" where id_user = \"%d\";", newName, idNumber));
+                                        rs = statement.executeQuery(String.format("select name_user from user where id_user = \"%d\"", idNumber));
+                                        while (rs.next()) {
+                                            String name = rs.getString("name_user" );
+                                            System.out.println("Your name was changed successfully in " + name);
+                                        }
 
-                                }
-                                case SURNAME -> {
-                                    System.out.println("Enter your new surname: ");
-                                    String newSurname = scanner.nextLine();
-                                    statement.executeUpdate(String.format("update socialnetwork.user set surname_user = \"%s\" where id_user = \"%d\";", newSurname, idNumber));
-                                    rs = statement.executeQuery(String.format("select surname_user from user where id_user = \"%d\"", idNumber));
-                                    while(rs.next()){
-                                        String surname = rs.getString("surname_user");
-                                        System.out.println("Your name was changed successfully in " + surname);
+                                    }
+                                    case SURNAME -> {
+                                        System.out.println("Enter your new surname: " );
+                                        String newSurname = scanner.nextLine();
+                                        statement.executeUpdate(String.format("update socialnetwork.user set surname_user = \"%s\" where id_user = \"%d\";", newSurname, idNumber));
+                                        rs = statement.executeQuery(String.format("select surname_user from user where id_user = \"%d\"", idNumber));
+                                        while (rs.next()) {
+                                            String surname = rs.getString("surname_user" );
+                                            System.out.println("Your name was changed successfully in " + surname);
+                                        }
+                                    }
+                                    case EMAIL -> {
+                                        System.out.println("Enter your current email: " );
+                                        String email = scanner.nextLine();
+                                        System.out.println("Enter your password: " );
+                                        String password = scanner.nextLine();
+                                        System.out.println("Enter your new email: " );
+                                        String newEmail = scanner.nextLine();
+                                        statement.executeUpdate(String.format("update socialnetwork.user set email_user = \"%s\" where email_user = \"%s\" and password_user = \"%s\" and id_user = \"%d\";", newEmail, email, password, idNumber));
+                                        rs = statement.executeQuery(String.format("select email_user from user where id_user = \"%d\"", idNumber));
+                                        while (rs.next()) {
+                                            String emailD = rs.getString("email_user" );
+                                            System.out.println("Your name was changed successfully in " + emailD);
+                                        }
+                                    }
+                                    case PASSWORD -> {
+                                        System.out.println("Enter your email: " );
+                                        String email = scanner.nextLine();
+                                        System.out.println("Enter your current password: " );
+                                        String password = scanner.nextLine();
+                                        System.out.println("Enter your new password: " );
+                                        String newPassword = scanner.nextLine();
+                                        statement.executeUpdate(String.format("update socialnetwork.user set password_user = \"%s\" where email_user = \"%s\" and password_user = \"%s\" and id_user = \"%d\";", newPassword, email, password, idNumber));
+                                    }
+                                    case NICKNAME -> {
+                                        System.out.println("Enter your new nickname: " );
+                                        String newNickname = scanner.nextLine();
+                                        statement.executeUpdate(String.format("update socialnetwork.user set nickname_user = \"%s\" where id_user = \"%d\";", newNickname, idNumber));
+                                        rs = statement.executeQuery(String.format("select nickname_user from user where id_user = \"%d\"", idNumber));
+                                        while (rs.next()) {
+                                            String nick = rs.getString("nickname_user" );
+                                            System.out.println("Your name was changed successfully in " + nick);
+                                        }
                                     }
                                 }
-                                case EMAIL -> {
-                                    System.out.println("Enter your current email: ");
-                                    String email = scanner.nextLine();
-                                    System.out.println("Enter your password: ");
-                                    String password = scanner.nextLine();
-                                    System.out.println("Enter your new email: ");
-                                    String newEmail = scanner.nextLine();
-                                    statement.executeUpdate(String.format("update socialnetwork.user set email_user = \"%s\" where email_user = \"%s\" and password_user = \"%s\" and id_user = \"%d\";", newEmail, email, password, idNumber));
-                                    rs = statement.executeQuery(String.format("select email_user from user where id_user = \"%d\"", idNumber));
-                                    while(rs.next()){
-                                        String emailD = rs.getString("email_user");
-                                        System.out.println("Your name was changed successfully in " + emailD);
+                            }
+                            case PROFILE -> {
+                                System.out.println("Do you want to create a post o view a post? Type 'create_post' or 'view_post'!" );
+                                Profile p = Profile.valueOf(scanner.nextLine().toUpperCase());
+                                switch (p) {
+                                    case CREATE_POST -> {
+                                        String name = user.getNameUser();
+
+                                        System.out.println("How do you feel today?" );
+                                        String message = scanner.nextLine();
+                                        post.setMessagePost(message);
+
+                                        statement.executeUpdate(String.format("insert into `socialnetwork`.`post` (id_user, message_post)" +
+                                                        "values (\"%d\", \"%s\");",
+                                                idNumber, post.getMessagePost()));
                                     }
-                                }
-                                case PASSWORD -> {
-                                    System.out.println("Enter your email: ");
-                                    String email = scanner.nextLine();
-                                    System.out.println("Enter your current password: ");
-                                    String password = scanner.nextLine();
-                                    System.out.println("Enter your new password: ");
-                                    String newPassword = scanner.nextLine();
-                                    statement.executeUpdate(String.format("update socialnetwork.user set password_user = \"%s\" where email_user = \"%s\" and password_user = \"%s\" and id_user = \"%d\";", newPassword, email, password, idNumber));
-                                }
-                                case NICKNAME -> {
-                                    System.out.println("Enter your new nickname: ");
-                                    String newNickname = scanner.nextLine();
-                                    statement.executeUpdate(String.format("update socialnetwork.user set nickname_user = \"%s\" where id_user = \"%d\";", newNickname, idNumber));
-                                    rs = statement.executeQuery(String.format("select nickname_user from user where id_user = \"%d\"", idNumber));
-                                    while(rs.next()){
-                                        String nick = rs.getString("nickname_user");
-                                        System.out.println("Your name was changed successfully in " + nick);
+                                    case VIEW_POST -> {
+                                        rs = statement.executeQuery(String.format("select message_post from socialnetwork.post where id_user = \"%d\";", idNumber));
+                                        System.out.println("Your posts\n");
+                                        while (rs.next()) {
+                                            String message = rs.getString("message_post" );
+                                            System.out.println(message);
+                                        }
+                                        System.out.println();
                                     }
                                 }
                             }
