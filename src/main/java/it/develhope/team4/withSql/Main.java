@@ -9,31 +9,31 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /**
+        /*
          * Variabili per accedere al database
          */
         String dburl = "jdbc:mysql://localhost:3306/socialnetwork";
         String userdb = "developer";
         String passworddb = "DeVe1234@#";
 
-        /**
+        /*
          * Ho creato una connessione
          */
         Connection connection;
 
-        /**
+        /*
          * Ho creato un result set
          */
         ResultSet rs;
 
-        /**
+        /*
          * Ho creato un utente di base User
          */
         User user = new User();
 
         Post post = new Post();
 
-        /**
+        /*
          * Ho creato uno scanner
          */
         Scanner scanner = new Scanner(System.in);
@@ -45,34 +45,34 @@ public class Main {
 
             System.out.println("Welcome to Dh Social!");
 
-            /**
+            /*
              * Chiedo all'utente cosa voglia fare, se fare il login oppure registrarsi
              */
             System.out.println("Do you want to login or register? Please type 'login' or 'register'?");
 
             RegistrationLogin rl = RegistrationLogin.valueOf(scanner.nextLine().toUpperCase());
 
-            /**
+            /*
              * Switch con Register e Login come casi
              */
             switch (rl) {
                 case REGISTER -> {
 
-                    /**
+                    /*
                      * Chiedo all'utente di inserire il nome e lo salvo temporaneamente nella classe user
                      */
                     System.out.println("Enter your name: ");
                     String name = scanner.nextLine();
                     user.setNameUser(name);
 
-                    /**
+                    /*
                      * Chiedo all'utente di inserire il cognome e lo salvo temporaneamente nella classe user
                      */
                     System.out.println("Enter your surname: ");
                     String surname = scanner.nextLine();
                     user.setSurnameUser(surname);
 
-                    /**
+                    /*
                      * Chiedo all'utente di inserire l'email e verifico che sia veramente un email e la salvo
                      * temporaneamente nella classe user
                      */
@@ -95,28 +95,28 @@ public class Main {
                     } while (!bool);
                     user.setEmailUser(email);
 
-                    /**
+                    /*
                      * Chiedo all'utente di inserire la password e la salvo temporaneamente nella classe user
                      */
                     System.out.println("Enter your password: ");
                     String password = scanner.nextLine();
                     user.setPasswordUser(password);
 
-                    /**
+                    /*
                      * Chiedo all'utente di inserire il nickname e lo salvo temporaneamente nella classe user
                      */
                     System.out.println("Enter your nickname: ");
                     String nickname = scanner.nextLine();
                     user.setNicknameUser(nickname);
 
-                    /**
+                    /*
                      * Inserisco i dati nel database attraverso i get della classe user
                      */
                     statement.executeUpdate(String.format("insert into `socialnetwork`.`user` (name_user, surname_user, email_user, password_user, nickname_user)" +
                                     "values (\"%s\", \"%s\", \"%s\", \"%s\", \"%s\");",
                             user.getNameUser(), user.getSurnameUserUser(), user.getEmailUser(), user.getPasswordUser(), user.getNicknameUser()));
 
-                    /**
+                    /*
                      * attraverso un result set estraggo il nickname dat database ed attraverso un ciclo while do il
                      * benvenuto all'utente chiamandolo con il nickname
                      */
@@ -128,7 +128,7 @@ public class Main {
                 }
                 case LOGIN -> {
 
-                    /**
+                    /*
                      * Chiedo all'utende di inserire le sue credenziali, ovvero email e password
                      */
                     System.out.println("Enter credentials for login!");
@@ -144,7 +144,7 @@ public class Main {
                         System.out.println("Id user = " + idNumber);
                     }
 
-                    /**
+                    /*
                      * Controllo che siano presenti nel database e attraverso un ciclo while estraggo di nuovo il
                      * nickname e do il banvenuto all'utente.
                      */
@@ -154,13 +154,27 @@ public class Main {
                         System.out.println("Welcome back " + nick + "!");
                     }
 
+                    /*
+                     * Aggiunta di loop while per rifare domanda all'utente e non far finire l'applicazione
+                     */
                     while(true) {
                         System.out.println("What do you want to do? Type 'settings', 'profile', 'chat' or 'community'!" );
                         HomePage hp = HomePage.valueOf(scanner.nextLine().toUpperCase());
+
+                        /*
+                         * Costrutto switch per i casi in cui l'utente voglia accedere a setting, profile, chat oppure
+                         * community.
+                         */
                         switch (hp) {
                             case SETTINGS -> {
                                 System.out.println("What do you need to change? Type 'name', 'surname', 'email', 'password' or 'nickname'!" );
                                 Settings set = Settings.valueOf(scanner.nextLine().toUpperCase());
+
+                                /*
+                                 * All'interno di setting un altro costutto switch per far scegliere all'utente cosa
+                                 * voglia modificare tra nome, cognome, email, password e nickname.
+                                 * Tutto rigorosametne aggiornato in database
+                                 */
                                 switch (set) {
                                     case NAME -> {
                                         System.out.println("Enter your new name: " );
@@ -218,13 +232,20 @@ public class Main {
                                     }
                                 }
                             }
+
+                            /*
+                             * Caso profilo, in cui per ora l'utente puo sono creare e vedere post
+                             */
                             case PROFILE -> {
                                 System.out.println("Do you want to create a post o view a post? Type 'create_post' or 'view_post'!" );
                                 Profile p = Profile.valueOf(scanner.nextLine().toUpperCase());
+
+                                /*
+                                 * Nuovo switch per i casi di creatione e visualizzazione post sempre aggiunti ed
+                                 * aggiornati nel database.
+                                 */
                                 switch (p) {
                                     case CREATE_POST -> {
-                                        String name = user.getNameUser();
-
                                         System.out.println("How do you feel today?" );
                                         String message = scanner.nextLine();
                                         post.setMessagePost(message);
