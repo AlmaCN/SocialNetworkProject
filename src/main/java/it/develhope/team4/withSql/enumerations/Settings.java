@@ -1,4 +1,4 @@
-package it.develhope.team4.withSql;
+package it.develhope.team4.withSql.enumerations;
 
 public enum Settings {
 
